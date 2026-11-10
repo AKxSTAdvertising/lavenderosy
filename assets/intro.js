@@ -20,10 +20,10 @@
       .lav-opening__center{position:relative;z-index:2;text-align:center;padding:30px;transform:translateY(-6px)}
       .lav-opening__flower{position:relative;width:95px;height:95px;margin:0 auto 27px;animation:lav-bloom 1.5s cubic-bezier(.2,.8,.2,1) both}
       .lav-opening__flower svg{width:100%;height:100%;filter:drop-shadow(0 8px 12px rgba(136,93,132,.15))}
-      .lav-opening__brand{font:500 clamp(49px,8vw,105px)/1.15 'Playfair Display',Georgia,serif;letter-spacing:-.07em;color:#3b2d3e;opacity:0;animation:lav-rise .85s .32s cubic-bezier(.2,.8,.2,1) forwards}
+      .lav-opening__brand{font:500 clamp(49px,8vw,105px)/1.15 'Cormorant Garamond',Georgia,serif;letter-spacing:-.07em;color:#3b2d3e;opacity:0;animation:lav-rise .85s .32s cubic-bezier(.2,.8,.2,1) forwards}
       .lav-opening__brand span{color:#a67ca7}
       .lav-opening__rule{width:min(230px,55vw);height:1px;margin:23px auto 18px;background:linear-gradient(90deg,transparent,#b18cad,transparent);transform:scaleX(0);animation:lav-rule 1.1s .65s ease forwards}
-      .lav-opening__tag{font:600 clamp(9px,1.2vw,12px)/1.7 'DM Sans',Arial,sans-serif;letter-spacing:.26em;text-transform:uppercase;color:#8e718d;opacity:0;animation:lav-rise .8s .85s ease forwards}
+      .lav-opening__tag{font:600 clamp(9px,1.2vw,12px)/1.7 'Manrope',Arial,sans-serif;letter-spacing:.26em;text-transform:uppercase;color:#8e718d;opacity:0;animation:lav-rise .8s .85s ease forwards}
       .lav-opening__petal{position:absolute;width:17px;height:32px;background:linear-gradient(145deg,#e3bfdc,#a97eaf);border-radius:90% 0 90% 0;opacity:.6;pointer-events:none;animation:lav-petal var(--dur,3.3s) var(--delay,0s) ease-in-out both;left:var(--x);top:var(--y);transform:rotate(var(--rot))}
       .lav-opening__hint{position:absolute;bottom:26px;left:0;right:0;text-align:center;font:500 10px 'DM Sans',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#9b8498;opacity:0;animation:lav-rise .6s 1.2s forwards}
       @keyframes lav-bloom{0%{opacity:0;transform:scale(.35) rotate(-55deg)}65%{opacity:1;transform:scale(1.09) rotate(7deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
