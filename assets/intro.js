@@ -7,6 +7,28 @@
       sync();
       window.addEventListener('scroll',sync,{passive:true});
     }
+    // Consistent, subtle premium motion on all pages (including imported posts).
+    const motionStyle=document.createElement('style');
+    motionStyle.textContent=`
+      @media(prefers-reduced-motion:no-preference){
+        .lav-reveal{opacity:0;transform:translate3d(0,28px,0);filter:blur(3px);transition:opacity .85s cubic-bezier(.2,.7,.2,1),transform .85s cubic-bezier(.2,.7,.2,1),filter .85s ease}
+        .lav-reveal.lav-visible{opacity:1;transform:none;filter:blur(0)}
+        .card,.category,.btn,.nav a,.logo{transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease,color .25s ease}
+        .card:hover{transform:translateY(-7px)}
+        .category:hover{transform:translateY(-3px)}
+        .btn:hover{transform:translateY(-2px)}
+        .header{transition:background .35s,box-shadow .35s}
+        .lav-opening__flower{filter:drop-shadow(0 12px 25px rgba(147,97,145,.22))}
+      }
+    `;
+    document.head.appendChild(motionStyle);
+    const motionTargets=document.querySelectorAll('.section-heading,.card,.category,.split,.article h2,.article blockquote,.wp-content h2,.wp-content figure,.legal h2');
+    if('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      const observer=new IntersectionObserver(entries=>{
+        entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('lav-visible');observer.unobserve(entry.target)}});
+      },{threshold:.07,rootMargin:'0px 0px -25px 0px'});
+      motionTargets.forEach((el,i)=>{if(el.classList.contains('reveal'))return;el.classList.add('lav-reveal');el.style.transitionDelay=((i%4)*65)+'ms';observer.observe(el)});
+    }
     if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
     if(document.querySelector('.lav-opening'))return;
 
