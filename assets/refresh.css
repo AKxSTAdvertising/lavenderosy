@@ -55,3 +55,11 @@ img{max-width:100%}
   .reveal{transform:translateY(12px);transition-duration:.55s}
 }
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;transition:none!important}}
+
+/* Footer: left-align every column and link on desktop and mobile */
+.footer,.footer *{text-align:left!important}
+.footer .lav-footer-inner{justify-items:start!important;align-items:start!important}
+.footer .lav-footer-inner>div{width:100%;text-align:left!important}
+.footer .lav-footer-inner a{display:block;text-align:left!important;margin-left:0!important;margin-right:0!important}
+.footer .lav-copyright{text-align:left!important;margin-left:auto;margin-right:auto}
+@media(max-width:720px){.footer{padding-left:12px!important;padding-right:12px!important}.footer .lav-footer-inner{grid-template-columns:1fr!important;justify-items:start!important}.footer .lav-footer-inner>div:first-child{grid-column:auto!important}}
