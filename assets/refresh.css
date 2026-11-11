@@ -63,3 +63,30 @@ img{max-width:100%}
 .footer .lav-footer-inner a{display:block;text-align:left!important;margin-left:0!important;margin-right:0!important}
 .footer .lav-copyright{text-align:left!important;margin-left:auto;margin-right:auto}
 @media(max-width:720px){.footer{padding-left:12px!important;padding-right:12px!important}.footer .lav-footer-inner{grid-template-columns:1fr!important;justify-items:start!important}.footer .lav-footer-inner>div:first-child{grid-column:auto!important}}
+
+/* Homepage mobile layout: keep every block inside the visible viewport */
+@media(max-width:720px){
+ html{width:100%;overflow-x:hidden}
+ body{width:100%;min-width:0;overflow-x:hidden}
+ #home,#home>section,#home>.ticker,#home>.wrap,main{width:100%;min-width:0;max-width:100%;margin-left:0;margin-right:0;box-sizing:border-box}
+ #home .wrap{width:100%;max-width:100%;margin-inline:auto;padding-inline:12px!important}
+ #home .section{padding-block:46px}
+ #home .section-heading{width:100%;max-width:100%;margin-inline:auto;padding-inline:0}
+ #home .editorial{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:28px!important;width:100%;min-width:0}
+ #home .story{display:block;width:100%;min-width:0;max-width:100%;margin:0;box-sizing:border-box}
+ #home .story-img{display:block;width:100%;aspect-ratio:4/3!important;height:auto!important;overflow:hidden;border-radius:10px}
+ #home .story-img img{display:block;width:100%;height:100%!important;object-fit:contain!important}
+ #home .story>h3,#home .story>p,#home .story>a{max-width:100%;overflow-wrap:break-word}
+ #home .categories{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;width:100%;gap:12px}
+ #home .category{width:100%;min-width:0;overflow:hidden;border-radius:9px}
+ #home .category img{max-width:100%;height:100%;object-fit:cover}
+ #home .featured-layout,#home .about{display:grid!important;grid-template-columns:minmax(0,1fr)!important;width:100%;gap:24px}
+ #home .featured-image,#home .about-photo{width:100%;max-width:100%;height:auto!important;aspect-ratio:4/3;overflow:hidden;border-radius:10px}
+ #home .featured-image img,#home .about-photo img{height:100%!important;object-fit:contain!important}
+ #home .featured-copy,#home .about-copy{min-width:0;width:100%;padding:0 12px!important}
+ #home .hero{width:calc(100% - 24px)!important;margin:12px!important;grid-template-columns:minmax(0,1fr)!important}
+ #home .hero-copy,#home .hero-media{min-width:0;max-width:100%}
+ #home .quote{padding-inline:20px!important}
+ #home .ticker{padding-inline:12px;text-align:center}
+ #home .reveal{transform:none!important;opacity:1!important}
+}
