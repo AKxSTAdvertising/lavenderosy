@@ -160,3 +160,10 @@ img{max-width:100%}
 .lav-cinematic__tag{position:relative;z-index:12;color:#fff!important;text-shadow:0 2px 12px rgba(17,8,29,.65)}
 @keyframes lav-film-readable{from{opacity:.1;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:400px){.lav-cinematic__brand{font-size:clamp(38px,10.5vw,52px)!important;letter-spacing:-.075em}}
+
+/* Readable cinematic wordmark: visible throughout the opening */
+.lav-cinematic__brand{display:block!important;position:relative;z-index:100!important;opacity:1!important;visibility:visible!important;transform:none!important;filter:none!important;animation:none!important;font-family:Georgia,'Times New Roman',serif!important;font-weight:600!important;font-size:clamp(40px,10vw,112px)!important;line-height:1.2!important;letter-spacing:-.055em!important;color:#fff!important;text-align:center!important;text-shadow:0 2px 3px #24102e,0 6px 25px rgba(15,4,24,.85)!important;white-space:nowrap!important}
+.lav-cinematic__brand em{display:inline!important;font-style:normal!important;color:#ffe3f5!important;text-shadow:0 2px 3px #24102e,0 6px 25px rgba(15,4,24,.85)!important}
+.lav-cinematic__content{z-index:100!important}
+.lav-cinematic__flower,.lav-cinematic__tag{z-index:101!important;position:relative}
+@media(max-width:390px){.lav-cinematic__brand{font-size:clamp(35px,10vw,43px)!important}}
