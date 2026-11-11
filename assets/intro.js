@@ -1,6 +1,19 @@
 /* Lavenderosy signature opening — replays on every page load and refresh. */
 (()=>{
   const init=()=>{
+    // Keep legacy article and category pages consistent with the sitewide navigation/footer.
+    if(!document.querySelector('link[href="/lavenderosy/assets/refresh.css"]')){
+      const theme=document.createElement('link');theme.rel='stylesheet';theme.href='/lavenderosy/assets/refresh.css';document.head.appendChild(theme);
+    }
+    const links=[['Home','/lavenderosy/'],['Latest Posts','/lavenderosy/latest-posts/'],['Style & Lifestyle','/lavenderosy/style-lifestyle/'],['My Journal','/lavenderosy/my-journal/'],['About','/lavenderosy/about/'],['Contact','/lavenderosy/contact/']];
+    const nav=document.querySelector('.header .nav');
+    if(nav){nav.innerHTML=links.map(([label,url])=>'<a href="'+url+'">'+label+'</a>').join('');
+      if(!document.querySelector('.lav-menu,.menu-toggle')){const btn=document.createElement('button');btn.className='lav-menu';btn.type='button';btn.textContent='☰';btn.setAttribute('aria-label','Toggle navigation');btn.setAttribute('aria-expanded','false');nav.before(btn);btn.addEventListener('click',()=>{const open=nav.classList.toggle('open');btn.textContent=open?'×':'☰';btn.setAttribute('aria-expanded',String(open))});}
+    }
+    const footer=document.querySelector('footer');
+    if(footer){footer.classList.add('footer');footer.innerHTML='<div class="lav-footer-inner"><div><a class="logo" href="/lavenderosy/">Lavender<span>osy.</span></a><p>Beauty in the everyday. Stories told with heart.</p></div><div><h4>Explore</h4><a href="/lavenderosy/latest-posts/">Latest Posts</a><a href="/lavenderosy/style-lifestyle/">Style &amp; Lifestyle</a><a href="/lavenderosy/my-journal/">My Journal</a></div><div><h4>Information</h4><a href="/lavenderosy/contact/">Contact</a><a href="/lavenderosy/privacy-policy/">Privacy Policy</a><a href="/lavenderosy/disclaimer/">Disclaimer</a></div></div><p class="lav-copyright">© 2026 Lavenderosy · All rights reserved.</p>';}
+    if(!document.querySelector('link[rel="icon"]')){const icon=document.createElement('link');icon.rel='icon';icon.type='image/svg+xml';icon.href='/lavenderosy/assets/lavenderosy-mark.svg';document.head.appendChild(icon);}
+
     const header=document.querySelector('.header');
     if(header){
       const sync=()=>header.classList.toggle('scrolled',window.scrollY>12);
@@ -59,28 +72,7 @@
     `;
     document.head.appendChild(style);
 
-    const overlay=document.createElement('div');
-    overlay.className='lav-opening';
-    overlay.setAttribute('aria-label','Lavenderosy opening animation');
-    overlay.setAttribute('role','presentation');
-    const flower='<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="#b98dbb"><ellipse cx="50" cy="26" rx="14" ry="25"/><ellipse cx="50" cy="74" rx="14" ry="25"/><ellipse cx="26" cy="50" rx="25" ry="14"/><ellipse cx="74" cy="50" rx="25" ry="14"/></g><g fill="#d8b3d3" transform="rotate(45 50 50)"><ellipse cx="50" cy="26" rx="13" ry="24"/><ellipse cx="50" cy="74" rx="13" ry="24"/><ellipse cx="26" cy="50" rx="24" ry="13"/><ellipse cx="74" cy="50" rx="24" ry="13"/></g><circle cx="50" cy="50" r="12" fill="#f7e2aa"/><circle cx="50" cy="50" r="5" fill="#fff6d9"/></svg>';
-    const petals=Array.from({length:14},(_,i)=>{
-      const x=(i*37+11)%96,y=(i*29+8)%84;
-      const dx=(i%2?1:-1)*(35+i*7),dy=70+(i%5)*38;
-      return '<i class="lav-opening__petal" style="--x:'+x+'%;--y:'+y+'%;--dx:'+dx+'px;--dy:'+dy+'px;--delay:'+(i%5*.16)+'s;--dur:'+(2.5+(i%4)*.3)+'s;--rot:'+(i*29)+'deg"></i>';
-    }).join('');
-    overlay.innerHTML='<div class="lav-opening__wash"></div>'+petals+'<div class="lav-opening__center"><div class="lav-opening__flower">'+flower+'</div><div class="lav-opening__brand">Lavender<span>osy.</span></div><div class="lav-opening__rule"></div><div class="lav-opening__tag">A gentle breath between the noise</div></div><div class="lav-opening__hint">Your softer space awaits ✦</div>';
-    document.body.appendChild(overlay);
-    let closed=false;
-    const close=()=>{
-      if(closed)return;
-      closed=true;
-      overlay.classList.add('is-leaving');
-      window.setTimeout(()=>{overlay.remove();style.remove()},850);
-    };
-    window.setTimeout(close,2450);
-    overlay.addEventListener('click',close,{once:true});
-    document.addEventListener('keydown',e=>{if(e.key==='Escape')close()},{once:true});
+
   };
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
   else init();
