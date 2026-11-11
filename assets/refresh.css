@@ -90,3 +90,17 @@ img{max-width:100%}
  #home .ticker{padding-inline:12px;text-align:center}
  #home .reveal{transform:none!important;opacity:1!important}
 }
+
+/* Persistent header and hamburger while scrolling */
+.header{position:sticky!important;top:0!important;z-index:1000!important;background:rgba(255,250,253,.97)!important;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.header.scrolled{box-shadow:0 5px 22px rgba(79,50,91,.12)}
+.menu-toggle,.lav-menu{position:relative;z-index:1002;flex-shrink:0}
+@media(max-width:850px){.header .nav.open{z-index:1001}}
+/* Gentle scroll reveal for post cards across listing and homepage sections */
+@media(prefers-reduced-motion:no-preference){
+ .lav-scroll-card{opacity:0;transform:translate3d(0,20px,0);transition:opacity .65s ease,transform .65s cubic-bezier(.22,1,.36,1);transition-delay:var(--lav-stagger,0ms);will-change:opacity,transform}
+ .lav-scroll-card.lav-in-view{opacity:1;transform:translate3d(0,0,0);will-change:auto}
+ #home .lav-scroll-card{opacity:0!important;transform:translate3d(0,20px,0)!important}
+ #home .lav-scroll-card.lav-in-view{opacity:1!important;transform:none!important}
+}
+@media(prefers-reduced-motion:reduce){.lav-scroll-card{opacity:1!important;transform:none!important;transition:none!important}}
