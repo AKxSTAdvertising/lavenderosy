@@ -4,19 +4,23 @@ function init(){
  const nav=document.querySelector('.nav'),toggle=document.querySelector('.lav-menu');
  if(nav&&toggle){toggle.addEventListener('click',()=>{const open=nav.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open));toggle.textContent=open?'×':'☰'});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');toggle.textContent='☰'}));}
  document.querySelectorAll('.nav a').forEach(a=>{if(a.pathname===location.pathname)a.setAttribute('aria-current','page')});
- const cards=[...document.querySelectorAll('.card,.story,.category')];
+
+ // Editorial content reveals: headlines, sections, images and cards.
  const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
  const supported='IntersectionObserver' in window;
- if(reduce||!supported){cards.forEach(c=>c.classList.add('visible','lav-in-view'));document.querySelectorAll('.reveal:not(.card):not(.story):not(.category)').forEach(e=>e.classList.add('visible'));return;}
- cards.forEach((card,i)=>{card.classList.add('lav-scroll-card');card.style.setProperty('--lav-stagger',((i%3)*85)+'ms');});
- // Allow the hidden state to paint before observing, so the entrance transition is visible.
- requestAnimationFrame(()=>requestAnimationFrame(()=>{
-  const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('lav-in-view','visible');observer.unobserve(entry.target)}})},{threshold:.12,rootMargin:'0px 0px -30px 0px'});
-  cards.forEach(c=>observer.observe(c));
-  const other=document.querySelectorAll('.reveal:not(.card):not(.story):not(.category)');
-  const headingObserver=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');headingObserver.unobserve(e.target)}})},{threshold:.08});
-  other.forEach(e=>headingObserver.observe(e));
- }));
+ const cards=[...document.querySelectorAll('.card,.story,.category')];
+ const blocks=[...document.querySelectorAll('main .hero h1,main .hero .eyebrow,main .hero p,main .hero-copy h1,main .hero-copy p,main .section-heading,main .section-heading h2,main .lav-category-section h2,main .featured-copy,main .about-copy,main .quote,main .intro,main .newsletter h2,main .editorial h2,main .post-content h2,main article h2,main article blockquote')].filter(el=>!el.closest('.card,.story,.category'));
+ const unique=[...new Set([...cards,...blocks])];
+ if(reduce||!supported){unique.forEach(el=>el.classList.add('visible','lav-in-view'));document.querySelectorAll('.reveal').forEach(el=>el.classList.add('visible'));return;}
+ cards.forEach((el,i)=>{el.classList.add('lav-scroll-card','lav-editorial-card');el.style.setProperty('--lav-stagger',((i%3)*95)+'ms')});
+ blocks.forEach((el,i)=>{el.classList.add('lav-editorial-reveal');el.style.setProperty('--lav-stagger',((i%3)*75)+'ms')});
+ // Mark initially visible elements before first paint where possible.
+ const observer=new IntersectionObserver(entries=>{for(const entry of entries){if(entry.isIntersecting){entry.target.classList.add('lav-in-view','visible');observer.unobserve(entry.target)}}},{threshold:.07,rootMargin:'0px 0px -18px 0px'});
+ unique.forEach(el=>observer.observe(el));
+ // Fallback: never leave content hidden if an observer is delayed.
+ setTimeout(()=>unique.forEach(el=>{if(!el.classList.contains('lav-in-view')){const r=el.getBoundingClientRect();if(r.top<innerHeight+100)el.classList.add('lav-in-view','visible')}}),1300);
+ document.querySelectorAll('.reveal:not(.card):not(.story):not(.category)').forEach(el=>{if(!el.classList.contains('lav-editorial-reveal'))el.classList.add('visible')});
+
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
