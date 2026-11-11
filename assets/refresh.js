@@ -28,7 +28,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  // Keep the brand as real HTML text: no per-letter DOM replacement or hidden opacity.
  for(let j=0;j<2;j++){const orbit=document.createElement('span');orbit.className='lav-cinematic__orbit'+(j?' lav-cinematic__orbit--inner':'');scene.insertBefore(orbit,scene.firstChild)}
  for(let j=0;j<17;j++){const petal=document.createElement('span');petal.className='lav-cinematic__petal';petal.style.setProperty('--petal-x',(8+(j*37)%85)+'%');petal.style.setProperty('--petal-y',(30+(j*29)%65)+'%');petal.style.setProperty('--petal-size',(8+j%4*4)+'px');petal.style.setProperty('--petal-angle',((j*53)%180)+'deg');petal.style.setProperty('--petal-delay',(.35+j%6*.28)+'s');petal.style.setProperty('--petal-dx',((j%2?1:-1)*(40+j%5*24))+'px');scene.appendChild(petal)}
- const skip=document.createElement('span');skip.className='lav-cinematic__skip';skip.textContent='Tap anywhere to skip';scene.appendChild(skip);
+
  let closed=false;const finish=()=>{if(closed)return;closed=true;scene.classList.add('is-leaving');setTimeout(()=>scene.remove(),900)};
  scene.addEventListener('click',finish,{once:true});
  setTimeout(finish,4200);setTimeout(()=>scene.remove(),6500);
