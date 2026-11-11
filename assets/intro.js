@@ -5,6 +5,7 @@
     if(!document.querySelector('link[href="/lavenderosy/assets/refresh.css"]')){
       const theme=document.createElement('link');theme.rel='stylesheet';theme.href='/lavenderosy/assets/refresh.css';document.head.appendChild(theme);
     }
+    if(!document.querySelector('script[src="/lavenderosy/assets/refresh.js"]')){const motion=document.createElement('script');motion.src='/lavenderosy/assets/refresh.js';motion.defer=true;document.head.appendChild(motion);}
     const links=[['Home','/lavenderosy/'],['Latest Posts','/lavenderosy/latest-posts/'],['Style & Lifestyle','/lavenderosy/style-lifestyle/'],['My Journal','/lavenderosy/my-journal/'],['About','/lavenderosy/about/'],['Contact','/lavenderosy/contact/']];
     const nav=document.querySelector('.header .nav');
     if(nav){nav.innerHTML=links.map(([label,url])=>'<a href="'+url+'">'+label+'</a>').join('');
