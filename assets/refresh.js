@@ -20,3 +20,13 @@ function init(){
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
+/* Dismiss the opening automatically; tap to skip. Never trap visitors. */
+(function(){
+ const scene=document.querySelector('.lav-cinematic');if(!scene)return;
+ let closed=false;
+ const finish=()=>{if(closed)return;closed=true;scene.classList.add('is-leaving');setTimeout(()=>scene.remove(),800)};
+ scene.addEventListener('click',finish,{once:true});
+ if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches){finish();return}
+ setTimeout(finish,3200);
+ setTimeout(()=>scene.remove(),5500);
+})();
