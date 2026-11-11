@@ -104,3 +104,21 @@ img{max-width:100%}
  #home .lav-scroll-card.lav-in-view{opacity:1!important;transform:none!important}
 }
 @media(prefers-reduced-motion:reduce){.lav-scroll-card{opacity:1!important;transform:none!important;transition:none!important}}
+
+/* Signature opening: midnight violet unfolds into lavender */
+.lav-cinematic{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;overflow:hidden;background:#100c1b;color:#fff;isolation:isolate;opacity:1;visibility:visible;transition:opacity .75s ease,visibility .75s;touch-action:manipulation}
+.lav-cinematic::before{content:"";position:absolute;inset:-40%;background:radial-gradient(circle at center,#b899df 0%,#8262ac 25%,#382447 55%,#100c1b 75%);transform:scale(.12);opacity:0;animation:lav-cine-bloom 2.9s cubic-bezier(.16,1,.3,1) forwards}
+.lav-cinematic::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 20%,rgba(8,5,18,.35) 100%);pointer-events:none}
+.lav-cinematic__content{position:relative;z-index:1;text-align:center;padding:24px;width:100%}
+.lav-cinematic__flower{font-size:clamp(32px,8vw,60px);color:#e4c9ff;display:block;opacity:0;animation:lav-cine-symbol 1.15s .22s ease both}
+.lav-cinematic__brand{display:block;font:500 clamp(55px,12vw,138px)/1.15 'Cormorant Garamond',Georgia,serif;letter-spacing:-.065em;white-space:nowrap;max-width:100%;color:#fff8ff;filter:drop-shadow(0 4px 20px rgba(16,6,31,.25));opacity:0;animation:lav-cine-title 1.1s .52s cubic-bezier(.16,1,.3,1) forwards}
+.lav-cinematic__brand em{font-style:normal;color:#f2d7ff!important}
+.lav-cinematic__line{height:1px;width:min(240px,65vw);margin:18px auto;background:linear-gradient(90deg,transparent,#fff3ff,transparent);transform:scaleX(0);animation:lav-cine-line 1s 1.05s ease forwards}
+.lav-cinematic__tag{font:600 clamp(9px,2.4vw,12px)/1.7 'Manrope',Arial,sans-serif;letter-spacing:.25em;text-transform:uppercase;color:#fff1ff;opacity:0;animation:lav-cine-symbol .9s 1.15s ease forwards}
+.lav-cinematic.is-leaving{opacity:0;visibility:hidden;pointer-events:none}
+@keyframes lav-cine-bloom{0%{opacity:0;transform:scale(.12)}28%{opacity:.65}100%{opacity:1;transform:scale(1.6)}}
+@keyframes lav-cine-title{from{opacity:0;transform:translateY(30px) scale(.93);filter:blur(12px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes lav-cine-symbol{from{opacity:0;transform:translateY(16px) rotate(-20deg)}to{opacity:1;transform:none}}
+@keyframes lav-cine-line{to{transform:scaleX(1)}}
+@media(max-width:400px){.lav-cinematic__brand{font-size:clamp(42px,12vw,56px)}}
+@media(prefers-reduced-motion:reduce){.lav-cinematic{display:none!important}}
